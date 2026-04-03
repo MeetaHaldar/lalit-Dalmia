@@ -1,0 +1,260 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory:    #FDF6E3;        /* warm butter */
+  --color-burgundy: #7B1C2E;        /* mehroom */
+  --color-maroon:   #5C0E1E;        /* deep mehroom */
+  --color-gold:     #B8860B;        /* dark gold */
+  --color-gold-light: #D4A843;      /* warm gold */
+  --color-butter:   #F5DEB3;        /* butter wheat */
+  --color-charcoal: #1C0A0E;        /* near-black with maroon tint */
+  --color-blush:    #F2D4C2;
+  --color-bg:       #FDF6E3;        /* butter background */
+  --color-text:     #2A0A10;        /* deep maroon-black */
+  --color-text-muted: #7A5C5C;
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body:    "DM Sans", system-ui, sans-serif;
+  --font-label:   "Cinzel", Georgia, serif;
+
+  --spacing-section:    6rem;
+  --spacing-section-sm: 3rem;
+}
+
+@layer base {
+  :root {
+    --color-ivory:      #FDF6E3;
+    --color-burgundy:   #7B1C2E;
+    --color-maroon:     #5C0E1E;
+    --color-gold:       #B8860B;
+    --color-gold-light: #D4A843;
+    --color-butter:     #F5DEB3;
+    --color-charcoal:   #1C0A0E;
+    --color-blush:      #F2D4C2;
+    --color-bg:         #FDF6E3;
+    --color-text:       #2A0A10;
+    --color-text-muted: #7A5C5C;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    line-height: 1.2;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; height: auto; }
+}
+
+@layer components {
+  .font-display { font-family: var(--font-display); }
+  .font-heading  { font-family: var(--font-heading); }
+  .font-body     { font-family: var(--font-body); }
+  .font-label    { font-family: var(--font-label); letter-spacing: 0.2em; text-transform: uppercase; }
+
+  /* ── Buttons ── */
+  .btn-gold {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.875rem 2.5rem;
+    border: 1px solid var(--color-gold);
+    color: var(--color-gold);
+    font-family: var(--font-label); font-size: 0.75rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    transition: all 0.3s ease;
+    position: relative; overflow: hidden;
+    background: transparent; cursor: pointer;
+  }
+  .btn-gold::before {
+    content: ''; position: absolute; inset: 0;
+    background: var(--color-gold);
+    transform: translateX(-100%); transition: transform 0.3s ease; z-index: -1;
+  }
+  .btn-gold:hover { color: var(--color-bg); }
+  .btn-gold:hover::before { transform: translateX(0); }
+
+  .btn-gold-solid {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 0.875rem 2.5rem;
+    background: var(--color-gold); color: var(--color-bg);
+    font-family: var(--font-label); font-size: 0.75rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    transition: all 0.3s ease; cursor: pointer;
+    border: 1px solid var(--color-gold);
+  }
+  .btn-gold-solid:hover { background: transparent; color: var(--color-gold); }
+
+  /* ── Premium Add to Bag button ── */
+  .btn-add-to-bag {
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-label); font-size: 0.7rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    position: relative; overflow: hidden; cursor: pointer;
+    border: none; outline: none;
+    background: linear-gradient(135deg, #5C0E1E 0%, #7B1C2E 40%, #B8860B 100%);
+    color: #F5DEB3;
+    box-shadow: 0 2px 12px rgba(92,14,30,0.35), inset 0 1px 0 rgba(245,222,179,0.15);
+    transition: all 0.35s ease;
+  }
+  .btn-add-to-bag::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #B8860B 0%, #D4A843 50%, #7B1C2E 100%);
+    opacity: 0; transition: opacity 0.35s ease;
+  }
+  .btn-add-to-bag:hover { box-shadow: 0 4px 20px rgba(184,134,11,0.45), inset 0 1px 0 rgba(245,222,179,0.2); transform: translateY(-1px); color: #3D0A14; }
+  .btn-add-to-bag:hover::before { opacity: 1; }
+  .btn-add-to-bag span { position: relative; z-index: 1; }
+
+  /* ── Layout ── */
+  .section-padding { padding-top: 5rem; padding-bottom: 5rem; }
+
+  .container-luxury {
+    max-width: 1400px; margin: 0 auto;
+    padding-left: 2rem; padding-right: 2rem;
+  }
+  @media (max-width: 768px) {
+    .container-luxury { padding-left: 1.25rem; padding-right: 1.25rem; }
+  }
+
+  /* ── Dividers ── */
+  .gold-divider      { width: 4rem; height: 1px; background: var(--color-gold); margin: 1.5rem auto; }
+  .gold-divider-left { width: 4rem; height: 1px; background: var(--color-gold); margin: 1.5rem 0; }
+
+  /* ── Colour helpers ── */
+  .text-gold     { color: var(--color-gold); }
+  .text-burgundy { color: var(--color-burgundy); }
+  .text-ivory    { color: var(--color-ivory); }
+  .bg-burgundy   { background-color: var(--color-burgundy); }
+  .bg-ivory      { background-color: var(--color-ivory); }
+  .bg-charcoal   { background-color: var(--color-charcoal); }
+}
+
+@layer utilities {
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1); }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Embroidery border strips ── */
+.embroidery-border-left,
+.embroidery-border-right {
+  position: fixed;
+  top: 0; bottom: 0;
+  width: 28px;
+  z-index: 40;
+  pointer-events: none;
+  overflow: hidden;
+}
+.embroidery-border-left  { left: 0; }
+.embroidery-border-right { right: 0; }
+
+.embroidery-border-left::before,
+.embroidery-border-right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg,
+      var(--color-maroon) 0%,
+      var(--color-burgundy) 30%,
+      var(--color-maroon) 60%,
+      var(--color-burgundy) 100%
+    );
+}
+
+/* SVG embroidery pattern via mask */
+.embroidery-border-left::after,
+.embroidery-border-right::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    /* vertical gold line */
+    linear-gradient(180deg, transparent 0%, var(--color-gold-light) 50%, transparent 100%),
+    /* repeating diamond chain */
+    repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      transparent 18px,
+      var(--color-gold) 18px,
+      var(--color-gold) 19px,
+      transparent 19px,
+      transparent 28px,
+      var(--color-gold-light) 28px,
+      var(--color-gold-light) 29px,
+      transparent 29px,
+      transparent 46px
+    );
+  background-size: 2px 100%, 100% 46px;
+  background-position: center 0, 0 0;
+  background-repeat: no-repeat, repeat-y;
+  opacity: 0.85;
+}
+
+/* Diamond motifs along the border */
+.embroidery-border-left .motif,
+.embroidery-border-right .motif {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-gold-light);
+  font-size: 10px;
+  line-height: 1;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* ── Marquee ── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 30s linear infinite;
+  display: flex; white-space: nowrap;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ── Gold shimmer ── */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+.gold-shimmer {
+  background: linear-gradient(90deg, var(--color-gold) 0%, var(--color-gold-light) 50%, var(--color-gold) 100%);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Curtain reveal ── */
+@keyframes curtainReveal {
+  0%   { clip-path: inset(0 100% 0 0); }
+  100% { clip-path: inset(0 0%   0 0); }
+}
+.curtain-reveal { animation: curtainReveal 0.8s cubic-bezier(0.16,1,0.3,1) forwards; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-gold); border-radius: 3px; }
+
+/* ── Selection ── */
+::selection { background: var(--color-gold); color: var(--color-bg); }
